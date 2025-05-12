@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Undangan Donny & Sulis</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-image: url('file:///C:/Users/yufri/Documents/doni%20rabi/ChatGPT%20Image%2012%20Mei%202025,%2018.58.27.png');
+      background-size: cover;
+      background-position: center;
+      font-family: 'Segoe UI', sans-serif;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+      color: white;
+    }
+
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.4);
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      z-index: 0;
+    }
+
+    .container, .save-date {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+      text-align: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      opacity: 1;
+      transition: opacity 1s ease;
+    }
+
+    .hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    h1, h2, p {
+      margin: 0.5em 0;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1em;
+      border: none;
+      border-radius: 10px;
+      background-color: #ffffffcc;
+      color: #000;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background-color: #ffffff;
+    }
+
+    audio {
+      display: none;
+    }
+
+    /* Snow effect */
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      z-index: 2;
+      color: white;
+      font-size: 1em;
+      user-select: none;
+      pointer-events: none;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+
+  <!-- Halaman Awal -->
+  <div class="container" id="intro">
+    <h1>Undangan Pernikahan</h1>
+    <h2>Donny & Sulis</h2>
+    <p>Kami mengundang Anda untuk hadir di hari bahagia kami.</p>
+    <button onclick="startInvitation()">Buka Undangan & Putar Musik</button>
+  </div>
+
+  <!-- Halaman Save The Date -->
+  <div class="save-date hidden" id="saveDate">
+    <h1>SAVE THE DATE</h1>
+    <h2>DONNY & SULIS</h2>
+    <p>Selasa, 3 Juni 2025</p>
+  </div>
+
+  <!-- Musik -->
+  <audio id="weddingMusic" src="file:///C:/Users/yufri/Documents/doni%20rabi/music/heri_surachman_7179640740585295131.mp3" loop></audio>
+
+  <script>
+    function startInvitation() {
+      const audio = document.getElementById('weddingMusic');
+      audio.play().catch((e) => {
+        alert('Klik diperlukan untuk memulai musik.');
+        console.error(e);
+      });
+
+      // Transisi keluar intro
+      const intro = document.getElementById('intro');
+      const saveDate = document.getElementById('saveDate');
+
+      intro.classList.add('hidden');
+
+      // Tampilkan saveDate setelah transisi
+      setTimeout(() => {
+        saveDate.classList.remove('hidden');
+        startSnow();
+      }, 1000); // delay sesuai durasi transisi
+    }
+
+    // Efek hujan salju
+    function startSnow() {
+      const snowContainer = document.body;
+      setInterval(() => {
+        const snowflake = document.createElement('div');
+        snowflake.classList.add('snowflake');
+        snowflake.style.left = Math.random() * window.innerWidth + 'px';
+        snowflake.style.fontSize = (Math.random() * 10 + 10) + 'px';
+        snowflake.style.opacity = Math.random();
+        snowflake.textContent = '❄';
+
+        snowContainer.appendChild(snowflake);
+
+        const duration = Math.random() * 5 + 5;
+        snowflake.style.animationDuration = duration + 's';
+
+        setTimeout(() => {
+          snowflake.remove();
+        }, duration * 1000);
+      }, 200);
+    }
+  </script>
+</body>
+</html>
